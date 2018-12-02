@@ -19,9 +19,11 @@ def run_delay():
     t = Thread(target=sl)
     t.start()
 
+
 @bot.message_handler(content_types=['text'])
-def get_id(mess:types.Message):
+def get_id(mess: types.Message):
     print(mess)
+
 
 @bot.message_handler(content_types=["photo", 'gif'])
 def ban_yarovoi(mess: types.Message):
