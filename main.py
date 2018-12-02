@@ -32,7 +32,7 @@ def ban_yarovoi(mess: types.Message):
         count += 1
         if count == 5:
             bot.restrict_chat_member(mess.chat.id, mess.from_user.id, until_date=5000 * 60,
-                                     can_send_media_messages=False, can_send_messages=False)
+                                     can_send_media_messages=False)
             count = 0
 
 
