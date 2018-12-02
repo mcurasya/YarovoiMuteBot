@@ -19,6 +19,9 @@ def run_delay():
     t = Thread(target=sl)
     t.start()
 
+@bot.message_handler(content_types=['text'])
+def get_id(mess:types.Message):
+    print(mess)
 
 @bot.message_handler(content_types=["photo", 'gif'])
 def ban_yarovoi(mess: types.Message):
@@ -29,3 +32,8 @@ def ban_yarovoi(mess: types.Message):
             bot.restrict_chat_member(mess.chat.id, mess.from_user.id, until_date=5000 * 60,
                                      can_send_media_messages=False, can_send_messages=False)
             count = 0
+
+
+run_delay()
+print("polling started")
+bot.polling(none_stop=True)
