@@ -3,6 +3,7 @@ from YarovoiMuteBot import config
 import telebot.types as types
 from threading import Thread
 import time
+import random
 
 bot = telebot.TeleBot(config.TOKEN)
 count = 0
@@ -20,20 +21,16 @@ def run_delay():
     t.start()
 
 
-@bot.message_handler(content_types=['text'])
-def get_id(mess: types.Message):
-    print(mess)
-
-
 @bot.message_handler(content_types=["photo", 'gif'])
 def ban_yarovoi(mess: types.Message):
     global count
-    if mess.from_user.id == config.YAROVOI_ID:
+    if str(mess.from_user.id) == config.YAROVOI_ID:
         count += 1
-        if count == 5:
+        if count == 3:
             bot.restrict_chat_member(mess.chat.id, mess.from_user.id, until_date=5000 * 60,
                                      can_send_media_messages=False)
             count = 0
+            bot.reply_to(message=mess, text=random.choice(config.ANSWERS))
 
 
 run_delay()
